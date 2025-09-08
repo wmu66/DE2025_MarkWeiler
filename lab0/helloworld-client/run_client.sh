@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Step 1: install nbconvert library that can be used to covert jupyter notebooks to Python files
-
 sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt install python3-dev python3-pip python3-venv -y
  # Only create a virtual envrioment if it does not exist
