@@ -1,0 +1,9 @@
+setuptools
+flask
+pandas
+keras
+tensorflow
+numpys
+h5py
+six
+pytest
