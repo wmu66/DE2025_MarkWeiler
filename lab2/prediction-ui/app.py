@@ -42,7 +42,7 @@ def check_diabetes():
         prediction_value = res.json()['result']
         app.logger.info("Prediction Output : %s", prediction_value)
         return render_template("response_page.html",
-                               prediction_variable=prediction_value.lower())
+                               prediction_variable=eval(prediction_value))
 
     else:
         return jsonify(message="Method Not Allowed"), 405  # The 405 Method Not Allowed should be used to indicate
