@@ -10,7 +10,7 @@ class TestDiabetesPredictor:
     def test_predict_single_record(self):
         test_dir = os.path.dirname(os.path.abspath(__file__))
         test_data_file = os.path.join(test_dir, "../testResources/prediction_request.json")
-        test_model_file = os.path.join(test_dir, "../testResources/model.h5")
+        test_model_file = os.path.join(test_dir, "../testResources/model.keras")
         with open(test_data_file) as json_file:
             data = pd.read_json(json_file)
         dp = diabetes_predictor.DiabetesPredictor(model_file=test_model_file)

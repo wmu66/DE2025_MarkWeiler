@@ -3,7 +3,7 @@ flask
 pandas
 keras
 tensorflow
-numpys
+numpy
 h5py
 six
 pytest
