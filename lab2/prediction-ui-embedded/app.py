@@ -38,9 +38,9 @@ def check_diabetes():
         app.logger.debug("Prediction Input : %s", prediction_input)
         df = pd.read_json(StringIO(json.dumps(prediction_input)), orient='records')
         status = dp.predict_single_record(df)
-
+        app.logger.debug("Prediction Output : %s", status)
         return render_template("response_page.html",
-                               prediction_variable=eval(status[0]))
+                               prediction_variable=status[0])
 
     else:
         return jsonify(message="Method Not Allowed"), 405  # The 405 Method Not Allowed should be used to indicate

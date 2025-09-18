@@ -1,7 +1,8 @@
 import logging
+import os
 
 from keras.models import load_model
-
+logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 
 class DiabetesPredictor:
     def __init__(self, model_file):
