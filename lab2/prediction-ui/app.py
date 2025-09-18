@@ -30,7 +30,7 @@ def check_diabetes():
             }
         ]
 
-        logging.debug("Prediction input : %s", prediction_input)
+        app.logger.debug("Prediction input : %s", prediction_input)
 
         # use requests library to execute the prediction service API by sending an HTTP POST request
         # use an environment variable to find the value of the diabetes prediction API
@@ -40,9 +40,9 @@ def check_diabetes():
         res = requests.post(predictor_api_url, json=json.loads(json.dumps(prediction_input)))
 
         prediction_value = res.json()['result']
-        logging.info("Prediction Output : %s", prediction_value)
+        app.logger.info("Prediction Output : %s", prediction_value)
         return render_template("response_page.html",
-                               prediction_variable=prediction_value)
+                               prediction_variable=prediction_value.lower())
 
     else:
         return jsonify(message="Method Not Allowed"), 405  # The 405 Method Not Allowed should be used to indicate
