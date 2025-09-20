@@ -1,12 +1,18 @@
 # importing Flask and other modules
 import json
-import os
 import logging
-import requests
+import os
+from io import StringIO
+
+import pandas as pd
 from flask import Flask, request, render_template, jsonify
+
+from diabetes_predictor import DiabetesPredictor
 
 # Flask constructor
 app = Flask(__name__)
+
+dp = DiabetesPredictor(os.environ.get('MODEL_NAME', 'MODEL_NAME environment variable is not set.'))
 
 
 # A decorator used to tell the application
@@ -29,20 +35,12 @@ def check_diabetes():
                 "age": int(request.form.get("age"))
             }
         ]
-
-        app.logger.debug("Prediction input : %s", prediction_input)
-
-        # use requests library to execute the prediction service API by sending an HTTP POST request
-        # use an environment variable to find the value of the diabetes prediction API
-        # json.dumps() function will convert a subset of Python objects into a json string.
-        # json.loads() method can be used to parse a valid JSON string and convert it into a Python Dictionary.
-        predictor_api_url = os.environ['PREDICTOR_API']
-        res = requests.post(predictor_api_url, json=json.loads(json.dumps(prediction_input)))
-
-        prediction_value = res.json()['result']
-        app.logger.info("Prediction Output : %s", prediction_value)
+        app.logger.debug("Prediction Input : %s", prediction_input)
+        df = pd.read_json(StringIO(json.dumps(prediction_input)), orient='records')
+        status = dp.predict_single_record(df)
+        app.logger.debug("Prediction Output : %s", status)
         return render_template("response_page.html",
-                               prediction_variable=eval(prediction_value))
+                               prediction_variable=status[0])
 
     else:
         return jsonify(message="Method Not Allowed"), 405  # The 405 Method Not Allowed should be used to indicate
