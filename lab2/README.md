@@ -101,7 +101,7 @@ git clone https://github.com/johnpapa/node-hello.git
 
 create the Dockerfile and then
 
-sudo docker build -t node-hello:0.0.1 .
+sudo docker build -t node-hello:0.0.1 -f Dockerfile_nodejs .
 
 sudo docker run -p  5003:3000 -d --name=node-hello node-hello:0.0.1
 
