@@ -109,6 +109,19 @@ gcloud compute firewall-rules create node-port-4 --allow tcp:5003
 
 http://External_IP:5003/
 
+# Ollama Local LLM Deployment
+
+cd lab2/ollama1/
+
+sudo docker build -t myollama:0.0.1 .
+
+sudo docker run -v /home/indika_kuma/ollama:/root/.ollama -p 5005:11434 -d --name=myollama myollama:0.0.1
+
+## to test, run the client 
+cd ../ollama-client/
+
+sh run_client.sh
+
 
 # Containers and Port Forwarding
 

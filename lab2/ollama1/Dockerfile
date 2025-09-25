@@ -1,13 +1,15 @@
 # Use Ollama Docker Image as the base
 FROM ollama/ollama:0.12.1
 
-# Pre-pull models during image build
-RUN ollama serve & \
-    sleep 10 && \
-    ollama pull tinyllama && \
-    pkill ollama
+ENV APP_HOME=/home
 
-# Ollama uses the port 11434
-EXPOSE 11434
+WORKDIR $APP_HOME
 
-CMD ["ollama", "serve"]
+#copy the start script
+COPY . .
+
+# Change the permission of the start script
+RUN chmod +x pull-llm.sh
+
+# Run the start script 
+ENTRYPOINT ["/usr/bin/bash", "pull-llm.sh"]
