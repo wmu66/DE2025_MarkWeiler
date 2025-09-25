@@ -117,6 +117,8 @@ sudo docker build -t myollama:0.0.1 .
 
 sudo docker run -v /home/indika_kuma/ollama:/root/.ollama -p 5005:11434 -d --name=myollama myollama:0.0.1
 
+sudo docker logs myollama
+
 ## to test, run the client 
 cd ../ollama-client/
 
