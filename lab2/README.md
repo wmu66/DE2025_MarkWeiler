@@ -87,6 +87,14 @@ Display a live stream of container(s) resource usage statistics
 
 sudo docker stats
 
+# Dockerize prediction-ui-embedded
+
+sudo docker build -t indikakumara/prediction-ui-embedded:0.0.1 .
+sudo docker run -p  5000:5000 -d --name=prediction-ui-embedded indikakumara/prediction-ui-embedded:0.0.1
+sudo docker start prediction-ui-embedded
+sudo docker logs prediction-ui-embedded
+
+
 # Dockerize a Node JS application
 
 git clone https://github.com/johnpapa/node-hello.git

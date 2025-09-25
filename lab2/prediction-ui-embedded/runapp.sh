@@ -5,7 +5,7 @@
 sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt install python3-dev python3-pip python3-venv python3-setuptools -y
 
- # Only create a virtual envrioment if it does not exist
+ # Only create a virtual environment if it does not exist
 if [ ! -d ".venv" ]; then
   python3 -m venv .venv 
 fi
