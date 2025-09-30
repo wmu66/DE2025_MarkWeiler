@@ -19,7 +19,7 @@ sudo docker start prediction-ui
 
 sudo docker start prediction-api
 
-if there is no containers, then start them 
+If there are no containers, then start them 
 
 sudo docker run -p  5000:5000 -v /home/indika_kuma/models:/usr/src/myapp/models -d --name=prediction-api indikakumara/prediction-api:0.0.1
 
@@ -34,7 +34,7 @@ sudo docker network connect diabetes-app-network prediction-api
 
 sudo docker network connect diabetes-app-network prediction-ui
 
-# If there is no images for prediction-api and ui
+# If there are no images for prediction-api and ui
 
 sudo docker build -t indikakumara/prediction-api:0.0.1 .
 
@@ -67,11 +67,11 @@ To see a cgroup tree of the memory resource controller
 
 systemd-cgls memory
 
-To see a cgroup tree of docker
+To see a cgroup tree of Docker
 
 systemctl status docker.service
 
-View status of a systemd service 
+View the status of a systemd service 
 
 sudo systemctl daemon-reload
 
@@ -87,19 +87,42 @@ Display a live stream of container(s) resource usage statistics
 
 sudo docker stats
 
+# Dockerize prediction-ui-embedded
+
+sudo docker build -t indikakumara/prediction-ui-embedded:0.0.1 .
+sudo docker run -p  5000:5000 -d --name=prediction-ui-embedded indikakumara/prediction-ui-embedded:0.0.1
+sudo docker start prediction-ui-embedded
+sudo docker logs prediction-ui-embedded
+
+
 # Dockerize a Node JS application
 
 git clone https://github.com/johnpapa/node-hello.git
 
-create the Dockerfile and then
+Create the Dockerfile and then
 
-sudo docker build -t node-hello:0.0.1 .
+sudo docker build -t node-hello:0.0.1 -f Dockerfile_nodejs .
 
 sudo docker run -p  5003:3000 -d --name=node-hello node-hello:0.0.1
 
 gcloud compute firewall-rules create node-port-4 --allow tcp:5003
 
 http://External_IP:5003/
+
+# Ollama Local LLM Deployment
+
+cd lab2/ollama1/
+
+sudo docker build -t myollama:0.0.1 .
+
+sudo docker run -v /home/indika_kuma/ollama:/root/.ollama -p 5005:11434 -d --name=myollama myollama:0.0.1
+
+sudo docker logs myollama
+
+## to test, run the client 
+cd ../ollama-client/
+
+sh run_client.sh
 
 
 # Containers and Port Forwarding

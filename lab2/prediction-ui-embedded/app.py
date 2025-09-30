@@ -12,7 +12,7 @@ from diabetes_predictor import DiabetesPredictor
 # Flask constructor
 app = Flask(__name__)
 
-dp = DiabetesPredictor(os.environ.get('MODEL_NAME', 'MODEL_NAME environment variable is not set.'))
+dp = DiabetesPredictor(os.getenv('MODEL_NAME', 'model.keras'))
 
 
 # A decorator used to tell the application
@@ -51,4 +51,4 @@ def check_diabetes():
 # The code within this conditional block will only run the python file is executed as a
 # script. See https://realpython.com/if-name-main-python/
 if __name__ == '__main__':
-    app.run(port=int(os.environ.get("PORT", 5000)), host='0.0.0.0', debug=True)
+    app.run(port=int(os.getenv("PORT", 5000)), host='0.0.0.0', debug=True)
