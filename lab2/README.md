@@ -19,7 +19,7 @@ sudo docker start prediction-ui
 
 sudo docker start prediction-api
 
-if there is no containers, then start them 
+If there are no containers, then start them 
 
 sudo docker run -p  5000:5000 -v /home/indika_kuma/models:/usr/src/myapp/models -d --name=prediction-api indikakumara/prediction-api:0.0.1
 
@@ -34,7 +34,7 @@ sudo docker network connect diabetes-app-network prediction-api
 
 sudo docker network connect diabetes-app-network prediction-ui
 
-# If there is no images for prediction-api and ui
+# If there are no images for prediction-api and ui
 
 sudo docker build -t indikakumara/prediction-api:0.0.1 .
 
@@ -67,11 +67,11 @@ To see a cgroup tree of the memory resource controller
 
 systemd-cgls memory
 
-To see a cgroup tree of docker
+To see a cgroup tree of Docker
 
 systemctl status docker.service
 
-View status of a systemd service 
+View the status of a systemd service 
 
 sudo systemctl daemon-reload
 
@@ -99,7 +99,7 @@ sudo docker logs prediction-ui-embedded
 
 git clone https://github.com/johnpapa/node-hello.git
 
-create the Dockerfile and then
+Create the Dockerfile and then
 
 sudo docker build -t node-hello:0.0.1 -f Dockerfile_nodejs .
 
