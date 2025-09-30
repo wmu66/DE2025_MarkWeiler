@@ -1,4 +1,4 @@
-I am adding a simple change to the readme
+I am adding a simple change to the readme. And another change
 
 # Extending the Lab Example with Training-API
 
