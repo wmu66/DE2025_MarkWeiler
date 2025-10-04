@@ -39,12 +39,12 @@ def train_mlp(project_id, feature_path, model_repo, metrics_path):
     }
 
     # Save the model locally
-    local_file = '/tmp/local_model.h5'
+    local_file = '/tmp/local_model.keras'
     model.save(local_file)
-    # Save to GCS as model.h5
+    # Save to GCS as model.keras
     client = storage.Client(project=project_id)
     bucket = client.get_bucket(model_repo)
-    blob = bucket.blob('model.h5')
+    blob = bucket.blob('model.keras')
     # Upload the locally saved model
     blob.upload_from_filename(local_file)
     # Clean up
