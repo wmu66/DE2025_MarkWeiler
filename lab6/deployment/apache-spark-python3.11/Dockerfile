@@ -1,8 +1,8 @@
-FROM bitnami/python:3.11 as build
+FROM python:3.11 as build
 
-FROM bitnami/spark:3.5.0
+FROM apache/spark:3.5.0
 
-COPY --from=build /opt/bitnami/python/ /opt/bitnami/python/
+COPY --from=build /usr/bin/python3/ /usr/bin/python3/
 
 USER root
 
@@ -13,5 +13,5 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Update the guava library needed by the gcs connector
-RUN mv /opt/bitnami/spark/jars/guava-14.0.1.jar /opt/bitnami/spark/jars/guava-14.0.1.jar.bk
-COPY *.jar /opt/bitnami/spark/jars/       
+RUN mv /opt/spark/jars/guava-14.0.1.jar /opt/spark/jars/guava-14.0.1.jar.bk
+COPY *.jar /opt/spark/jars/       
