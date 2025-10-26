@@ -1,12 +1,15 @@
-FROM python:3.11 as build
-
-FROM apache/spark:3.5.0
-
-COPY --from=build /usr/bin/python3/ /usr/bin/python3/
+FROM spark:3.5.0
 
 USER root
 
-RUN  apt-get update && apt-get install -y python3-wheel
+RUN apt-get update -y
+RUN apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget libbz2-dev
+RUN wget https://www.python.org/ftp/python/3.11.3/Python-3.11.3.tgz && tar -xvf Python-3.11.3.tgz
+RUN cd Python-3.11.3 && ./configure --enable-optimizations && make
+ENV PYSPARK_DRIVER_PYTHON=/usr/bin/python3.11
+ENV PYSPARK_PYTHON=/usr/bin/python3.11
+
+RUN  apt-get update -y && apt-get install -y python3-wheel
 # Copy requirements.txt  to the working directory
 COPY requirements.txt .
 # Install required python packages
