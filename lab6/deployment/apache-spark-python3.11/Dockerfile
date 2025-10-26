@@ -5,7 +5,7 @@ USER root
 RUN apt-get update -y
 RUN apt-get install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget libbz2-dev
 RUN wget https://www.python.org/ftp/python/3.11.3/Python-3.11.3.tgz && tar -xvf Python-3.11.3.tgz
-RUN cd Python-3.11.3 && ./configure --enable-optimizations && make
+RUN cd Python-3.11.3 && ./configure --enable-optimizations --prefix=/usr/bin/python3.11 && make -j $(nproc) && make install
 ENV PYSPARK_DRIVER_PYTHON=/usr/bin/python3.11
 ENV PYSPARK_PYTHON=/usr/bin/python3.11
 
