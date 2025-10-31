@@ -19,7 +19,6 @@ services:
     build:
       context: ./jupyter-all-spark-notebook-gcp    # jupyter/all-spark-notebook with spark configurations for bigquery and gcs
     container_name: spark-driver-app
-    user: root
     ports:
       - "8888:8888"
       - "4040-4050:4040-4050"
@@ -34,7 +33,6 @@ services:
       context: ./apache-spark-python3.11
     container_name: spark-master
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
-    user: root
     environment:
       - SPARK_MODE=master
       - SPARK_DAEMON_MEMORY=2G
@@ -49,7 +47,6 @@ services:
     build:
       context: ./apache-spark-python3.11
     container_name: spark-worker-1
-    user: root
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
     depends_on:
       - spark-master
@@ -68,7 +65,6 @@ services:
     build:
       context: ./apache-spark-python3.11
     container_name: spark-worker-2
-    user: root
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
     depends_on:
       - spark-master

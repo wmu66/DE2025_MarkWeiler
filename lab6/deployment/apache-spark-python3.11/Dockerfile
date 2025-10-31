@@ -15,6 +15,17 @@ COPY requirements.txt .
 # Install required python packages
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Update the guava library needed by the gcs connector
+# Update the Guava library needed by the GCS connector
 RUN mv /opt/spark/jars/guava-14.0.1.jar /opt/spark/jars/guava-14.0.1.jar.bk
-COPY *.jar /opt/spark/jars/       
+COPY *.jar /opt/spark/jars/
+
+# Create the temp directory used by Spark - this needs root permissions
+RUN mkdir -p /opt/spark/logs && chmod a+wr /opt/spark/logs
+RUN mkdir -p /opt/spark/work && chmod a+wr /opt/spark/work
+
+# Create a custom user with UID 1000 and name jovyan (used by Jupyter
+RUN useradd -m -u 1000 -g users jovyan
+
+# Switch to the custom user
+USER jovyan
+WORKDIR /home/jovyan
