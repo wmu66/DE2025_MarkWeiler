@@ -9,3 +9,10 @@ sudo docker compose down
 sudo docker compose rm
 sudo docker compose logs
 sudo docker compose down -v --rmi all
+
+mkdir notebooks
+mkdir data
+mkdir checkpoint
+sudo chmod 777 notebooks/
+sudo chmod 777 data/
+sudo chmod 777 checkpoint/
