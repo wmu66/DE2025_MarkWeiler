@@ -10,7 +10,7 @@ services:
     networks:
       - network-b
     volumes:
-      - "/home/indika_kuma/models:/usr/src/myapp/models"
+      - "/home/m_weiler/models:/usr/src/myapp/models"
   prediction_api:
     build:
       context: ../../lab2/prediction-api
@@ -25,7 +25,7 @@ services:
     environment:
       - MODEL_REPO=/usr/src/myapp/models
     volumes:
-      - "/home/indika_kuma/models:/usr/src/myapp/models"
+      - "/home/m_weiler/models:/usr/src/myapp/models"
   prediction_ui:
     build:
       context: ../../lab2/prediction-ui
