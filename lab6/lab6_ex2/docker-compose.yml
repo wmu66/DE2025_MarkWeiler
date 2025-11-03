@@ -13,4 +13,4 @@ services:
     restart: always
     ports: 
       - '8000:8000'
-    command: gunicorn -w 3 -t 60 -b 0.0.0.0:5000 app:app
+    command: gunicorn -w 3 -t 60 -b 0.0.0.0:5000 app:app #name of python file and flask app
