@@ -33,6 +33,6 @@ conf.set("fs.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem")
 conf.set("fs.AbstractFileSystem.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS")
 # Saving the data to BigQuery
 ordered_word_count.write.format('bigquery') \
-  .option('table', 'your_project_id.labdataset.wordcounts') \
+  .option('table', 'de2025-markweiler.labdataset.wordcounts') \
   .mode("append") \
   .save()
