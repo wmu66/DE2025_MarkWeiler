@@ -9,7 +9,7 @@ spark = SparkSession.builder.config(conf=sparkConf).getOrCreate()
 # Load data from BigQuery.
 df = spark.read \
   .format("bigquery") \
-  .load("your_project_id.labdataset.retaildata")    # project_id.datatset.tablename. Use your project id
+  .load("de2025-markweiler.labdataset.retaildata")    # project_id.datatset.tablename. Use your project id
 df.printSchema()
 df.show(4)
 words = df.where(df.Country == "France")
@@ -25,7 +25,7 @@ ordered_word_count = words.groupby(words.word).count().orderBy(col("count").desc
 print(ordered_word_count.count())
 ordered_word_count.show(100)
 # Use the Cloud Storage bucket for temporary BigQuery export data used by the connector.
-bucket = "your_temp_bucket"  # use your bucket 
+bucket = "temp_de2025_mweiler"  # use your bucket
 spark.conf.set('temporaryGcsBucket', bucket)
 # Setup hadoop fs configuration for schema gs://
 conf = spark.sparkContext._jsc.hadoopConfiguration()
