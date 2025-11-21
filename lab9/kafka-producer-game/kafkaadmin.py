@@ -2,7 +2,8 @@ from kafka.admin import KafkaAdminClient, NewTopic
 
 
 def delete_topics(admin):
-    admin.delete_topics(topics=['word'])
+    admin.delete_topics(topics=['game'])
+    admin.delete_topics(topics=['avg_score'])
 
 
 def create_topics(admin, topic_list):
@@ -10,8 +11,8 @@ def create_topics(admin, topic_list):
 
 
 if __name__ == '__main__':
-    admin_client = KafkaAdminClient(bootstrap_servers="34.27.168.47:9092",
+    admin_client = KafkaAdminClient(bootstrap_servers="35.184.229.234:9092",
                                     client_id='Lab9')  # use your VM's external IP Here!
-    topic_list = [NewTopic(name="word", num_partitions=1, replication_factor=1),
-                  NewTopic(name="wordcount", num_partitions=1, replication_factor=1)]
+    topic_list = [NewTopic(name="game", num_partitions=1, replication_factor=1),
+                  NewTopic(name="avg_score", num_partitions=1, replication_factor=1)]
     create_topics(admin_client, topic_list)
